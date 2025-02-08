@@ -76,12 +76,12 @@ This Weblog application is a modern, user-centric platform designed for seamless
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Esmat434/BlogNest.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd weblog
+   cd BlogNest
    ```
 
 3. Install dependencies:
@@ -135,4 +135,4 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 ## Contact
 For any questions or feedback, please reach out:
 - Email: [hadelesmatullah@gmail.com](mailto:hadelesmatullah@gmail.com)
-- GitHub: [Your GitHub Profile](https://github.com/yourusername)
+- GitHub: [Your GitHub Profile](https://github.com/Esmat434)
