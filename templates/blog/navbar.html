@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Responsive Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/navbar.css' %}">
+</head>
+
+<body class="bg-dark text-white">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <div class="container-fluid d-flex justify-content-between align-items-center flex-nowrap">
+            <!-- logo -->
+            <a class="navbar-brand fw-bold" href="#">
+                <span class="bg-white text-dark px-2 py-1 rounded">DEV</span>
+            </a>
+
+            <form accept="{% url 'home' %}" method="POST" class="d-flex flex-grow-1 mx-3 search-box" role="search">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" name="search-input" placeholder="Search..." aria-label="Search">
+                <button class="btn btn-outline-light me-2" name="btn" value="search-button" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+                <!-- Voice Button -->
+                <button type="button" class="btn btn-outline-light" id="voice-button">
+                    <i class="fa fa-microphone"></i>
+                </button>
+            </form>
+
+            {% if user.is_authenticated %}
+                <!-- buttons and icons -->
+                <div class="d-flex align-items-center flex-nowrap">
+                    <button type="button" class="btn btn-outline-light me-2 btn-create" id="create-post-button" data-url="{% url 'post-create' %}" style="cursor: pointer;">Create Post</button>
+
+                    <!-- notification icon -->
+                    <div class="notification-icon me-3" id="notification-icon" data-url="{% url 'post-notification' %}"
+                        style="cursor: pointer;">
+                        <i class="fa fa-bell fs-4 text-white"></i>
+                        <span class="badge rounded-pill bg-danger notification-badge">{{total_followee}}</span>
+                    </div>
+
+                    <!-- profile picture and menu -->
+                    <div class="dropdown">
+                        {% if user and user.picture %}
+                        <img src="{{user.picutre.url}}" class="profile-img" id="profileDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        {% else %}
+                        <img src="https://via.placeholder.com/40" class="profile-img" id="profileDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        {% endif %}
+                        <ul class="dropdown-menu dropdown-menu-end bg-dark text-white" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item text-white" href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li><a class="dropdown-item text-white" href="{% url 'accounts:profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item text-white" href="{% url 'accounts:settings' %}">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider bg-light">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="{% url 'accounts:signout' %}">Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {% else %}
+                <div class="d-flex align-items-center flex-nowrap">
+                    <a href="{% url 'accounts:signin' %}">
+                        <button type="button" class="btn btn-outline-light me-2 btn-create mx-3" id="create-post-button">Sign In</button>
+                    </a>
+                    <a href="{% url 'accounts:signup' %}">
+                        <button type="button" class="btn btn-outline-light me-2 btn-create" id="create-post-button">Sign Up</button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+</body>
+
+</html>

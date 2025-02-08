@@ -1,0 +1,24 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.circle-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #0d6efd;
+}
+
+.notification-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.notification-time {
+    font-size: 0.85rem;
+    color: gray;
+}

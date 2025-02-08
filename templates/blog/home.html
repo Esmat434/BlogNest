@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
+    <div class="container my-5 mx-auto max-w-2xl">
+        {% for post in posts %}
+
+            {% if post.image.all.0 %}
+                <!-- Post Card --> 
+                <div class="bg-white mt-2 rounded-2xl shadow-lg p-4">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="rounded-full bg-gray-300 w-12 h-12" style="background-image: url('{{ post.author.picture }}');"></div>
+                            <div class="ml-3">
+                                <h6 class="mb-0 font-bold">{{post.author.username}}</h6>
+                                <p class="mb-0 text-gray-500 text-sm">{{post.created_time}}</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-500">...</button>
+                    </div>
+
+                    <!-- Content -->
+                    <a href="{% url 'post-detail' post.id %}" ><div class="ascii-art text-center my-4" style="background-image: url('{{ post.image.all.0.image.url }}'); background-size: cover;background-position: center;background-repeat: no-repeat;height: 400px;width: 100%;">
+                    </div></a>
+                    <a href="{% url 'post-detail' post.id %}" ><h5 class="font-bold mb-2">{{post.title}}</h5></a>
+                    <!-- Reactions and Comments -->
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <a href="{% url 'post-detail' post.id %}" ><span class="mr-3 mx-3">❤️ {{post.total_like}} Likes</span></a>
+                            <a href="{% url 'post-detail' post.id %}" ><span class="mx-3">💬 {{post.comment_count}} Comments</span></a>
+                            <a href="{% url 'post-detail' post.id %}" ><span class="mx-3">👁️ {{post.total_view}} Views</span></a>
+                            <a href="{% url 'post-detail' post.id %}" ><span class="text-gray-500 mx-3">{{post.created_time.minute}} min read</span>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <!-- New Card Section -->
+                <div class="mt-2 bg-white rounded-2xl shadow-lg p-4">
+                    <div class="flex items-start">
+                        <div class="rounded-full bg-gray-300 w-12 h-12 shrink-0" style="background-image: url('{{ post.author.picture }}');"></div>
+                        <div class="ml-3">
+                            <h6 class="font-bold">{{post.author.username}}</h6>
+                            <p class="text-sm text-gray-500">{{post.created_time}}</p>
+                            <a href="{% url 'post-detail' post.id %}" ><h5 class="font-bold">{{post.title}}</h5></a>
+                            <div class="flex justify-between items-center mt-3">
+                                <a href="{% url 'post-detail' post.id %}" ><span class="mx-3">❤️ {{post.total_like}} Likes</span></a>
+                                <a href="{% url 'post-detail' post.id %}" ><span class="mx-3">💬 {{post.comment_count}} Comments</span></a>
+                                <a href="{% url 'post-detail' post.id %}" ><span class="mx-3">👁️ {{post.total_view}} Views</span></a>
+                                <span class="text-gray-500">{{post.created_time.minute}} min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

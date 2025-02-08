@@ -1,0 +1,181 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static '/css/postDetail.css' %}">
+    <!-- Header -->
+    {% if post.image.all.0.image %}
+        <header class="post-header" style="background-image: url('{{ post.image.all.0.image.url }}');">
+            <div class="header-content">
+                <h1>{{post.title}}</h1>
+                <p>{{post.author.username}} | {{post.created_time}} </p>
+            </div>
+        </header>
+    {% else %}
+        <header class="post-header" style="background-image: url('https://media.istockphoto.com/id/1352613626/vector/wave-3d-abstract-wave-dots-in-dark-background-big-data-technology-vector-background.jpg?s=612x612&w=0&k=20&c=JU9MeTspGLLTqqyKXXKlSpPfKmdH5fZqA2PdRKXpdHo=');">
+            <div class="header-content">
+                <h1>{{post.title}}</h1>
+                <p>{{post.author.username}} | {{post.created_time}} </p>
+            </div>
+        </header>
+    {% endif %}
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Post Content -->
+            <div class="col-lg-8">
+                <div class="post-content">
+                    {% if post.image.all.0.image %}
+                        <img src="{{post.image.all.0.image.url}}" alt="Featured Image">                
+                    {% else %}
+                        <img src="https://media.istockphoto.com/id/1352613626/vector/wave-3d-abstract-wave-dots-in-dark-background-big-data-technology-vector-background.jpg?s=612x612&w=0&k=20&c=JU9MeTspGLLTqqyKXXKlSpPfKmdH5fZqA2PdRKXpdHo="alt="Featured Image">
+                    {% endif %}
+                        <!-- Social and Interaction Section -->
+                    <div class="d-flex justify-content-start mt-3">
+                        <span class="mr-4 mx-3"><i class="fa fa-eye"></i> {{post.total_view}} Views</span>
+                        <span class="mr-4 mx-3" onclick="location.href='#button-comment'" style="cursor: pointer;"><i class="fa fa-regular fa-comment"></i> {{post.Comment.count}} Comments</span>
+                        <form method="POST" id="like_form">
+                            {% csrf_token %}
+                            <span class="mr-4 mx-3" id="btn_like" style="cursor: pointer;">
+                                <i class="fa {% if is_like %}fa-thumbs-up{% else %}fa-regular fa-thumbs-up{% endif %}"></i>
+                                <span id="like_count">{{ post.total_like }}</span> Likes
+                            </span>
+                            <input type="submit" id="input_like" name="btn" value="like" style="display: none;">
+                        </form>
+                        <span><i class="fa fa-regular fa-share-from-square"></i> 12 Shares</span>
+                    </div>
+                    
+                    <h2>{{post.title}}</h2>
+                    <p>{{post.content}}</p>
+                    {% if post.image.all %}
+                        {% for image in post.image.all|slice:"1:" %}
+                            <img src="{{image.image.url}}" alt="Featured Image">
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <!-- Comments Section -->
+                    <div class="comment-box shadow p-3 w-full">
+                        <!-- Input Section -->
+                        <div class="d-flex">
+                            {% if post.author.picture %}
+                                <!-- Profile Image -->
+                                <img src="{{post.author.picture.url}}" alt="Profile" class="profile-img rounded-circle me-3" style="width: 50px; height: 50px;">
+                            {% else %}
+                                <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg" alt="Profile" class="profile-img rounded-circle me-3" style="width: 50px; height: 50px;">
+                            {% endif %}    
+                            <!-- Textarea -->
+                            <textarea class="form-control bg-dark text-white" name="content" id="button-comment" rows="3" placeholder="Add to the discussion"></textarea>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-end mt-2">    
+                            <button type="submit" name="btn" value="comment" class="btn btn-success text-white px-4">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+                {% for comment in post.Comment.all %}
+                    <!-- Displaying a Comment -->
+                    <div class="comment-card shadow p-3 mt-4 w-full position-relative">
+                        <div class="d-flex align-items-center">
+                            {% if comment.user.picture %}
+                            <!-- Profile Image -->
+                            <img src="{{comment.user.picture.url}}" alt="Profile" class="profile-img rounded-circle me-3"
+                                style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"
+                                alt="Profile" class="profile-img rounded-circle me-3" style="width: 40px; height: 40px;">
+                            {% endif %}
+                            <!-- Name -->
+                            <span class="fw-bold">{{comment.user.username}}</span>
+                        </div>
+                        <!-- Comment Content -->
+                        <p class="mt-2">{{comment.content}}</p>
+                        <!-- Like and Reply Icons -->
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="text-muted">
+                                <i class="fa fa-thumbs-up"></i> Like
+                            </span>
+                            <!-- reply part -->
+                            <span class="text-muted" id="reply_btn" style="cursor: pointer;">
+                                <i class="fa fa-reply"></i> Reply
+                            </span>
+                            <form method="POST" class="d-flex align-items-center gap-2 reply-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment_id" value="{{comment.id}}">
+                                <input type="text" id="child_comment" class="form-control" name="reply_content" placeholder="Write a reply..."
+                                    style="display: none; max-width: 300px;">
+                                <input type="submit" id="child_comment_btn" class="btn btn-outline-danger" name="btn" value="reply"
+                                    style="display: none;">
+                            </form>
+                        </div>
+
+                        <!-- More Options Dropdown -->
+                        <div class="dropdown position-absolute top-0 end-0">
+                            <button class="btn btn-link p-0 dropdown-toggle" id="dropdownMenuButton-{{comment.id}}"
+                                data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 20px;">...</button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton-{{comment.id}}">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delete_comment_id" value="{{comment.id}}">
+                                    <li><button type="submit" name="btn" value="delete_comment" class="dropdown-item text-danger">Delete</button></li>
+                                </form>
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Card Section -->
+            <div class="col-lg-4">
+                <div class="profile-card w-100">
+                    <div class="d-flex align-items-center">
+                        {% if post.author.picture %}
+                            <img src="{{post.author.picture.url}}" alt="Profile Image" class="profile-img">
+                        {% else %}
+                            <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"alt="Profile Image" class="profile-img">
+                        {% endif %}
+                        <div class="ms-3">
+                            <p class="name">{{post.author.username}}</p>
+                        </div>
+                    </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" name="btn" value="follow" class="btn {% if is_follow %} btn-danger {% else %} btn-primary {% endif %} follow-btn">{% if is_follow %}UN Follow {% else %} Follow {% endif %}</button>
+                </form>
+                <div class="bio">
+                    <p><i class="fa fa-user-circle"></i> Bio:</p>
+                </div>
+            
+                <div class="birthdate">
+                    <p><i class="fa fa-birthday-cake"></i> Birthdate: {{post.author.birth_date}}</p>
+                </div>
+            
+                <div class="phone">
+                    <p><i class="fa fa-phone"></i> Phone: {{post.author.phone_number}}</p>
+                </div>
+            </div>  
+                {% for similar_post in similar_posts %}              
+                    <div class="card custom-card mb-2">
+                        {% if similar_post.image.all %}
+                            <img src="{{similar_post.image.all.0.image.url}}" class="card-img"alt="Card Image">
+                        {% else %}
+                            <img src="https://media.istockphoto.com/id/1352613626/vector/wave-3d-abstract-wave-dots-in-dark-background-big-data-technology-vector-background.jpg?s=612x612&w=0&k=20&c=JU9MeTspGLLTqqyKXXKlSpPfKmdH5fZqA2PdRKXpdHo=" class="card-img" alt="Card Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{% url 'post-detail' similar_post.id %}"><h5 class="card-title mb-0">{{similar_post.title}}</h5></a> <!-- حذف margin-bottom از title -->
+                                <span><i class="fas fa-eye"></i> {{similar_post.total_view}}</span>
+                            </div>
+                            <p class="card-text">{{similar_post.content|slice:":50"}}...</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static '/js/postDetail.js' %}"></script>
+{% endblock %}

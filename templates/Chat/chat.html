@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .chat-container {
+            max-width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            flex-shrink: 0;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem;
+        }
+
+        .chat-header img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
+
+        .chat-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .chat-footer {
+            flex-shrink: 0;
+            background-color: #ffffff;
+            border-top: 1px solid #dee2e6;
+            padding: 1rem;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+        }
+
+        .chat-message .message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+        }
+
+        .chat-message.sender .message {
+            background-color: #0d6efd;
+            color: white;
+            margin-left: auto;
+        }
+
+        .chat-message.receiver .message {
+            background-color: #f1f1f1;
+            color: #000;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-container">
+        <!-- Chat Header -->
+        <div class="chat-header d-flex align-items-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/5969/5969113.png" alt="Dianne Jhonsen"
+                class="rounded-circle me-2">
+            <strong>DEV</strong>
+            <span class="badge bg-success ms-auto">Online</span>
+        </div>
+
+        <!-- Chat Body -->
+        <div class="chat-body">
+            <!-- Chat Body -->
+        </div>
+
+        <!-- Chat Footer -->
+        <div class="chat-footer">
+            <form class="d-flex">
+                <input type="text" class="form-control me-2" id="chat-input" placeholder="Write Something...">
+                <button type="button" class="btn btn-primary" id="chat-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const username = "{{username}}"
+        const token = "{{token}}"
+        const chat_input = document.getElementById('chat-input')
+        const chat_btn = document.getElementById('chat-btn')
+        const chat_body = document.querySelector('.chat-body')
+        var protocol = window.location.protocol === "https:" ? "wss://" : "ws://"
+        const socket = new WebSocket(protocol + window.location.host + '/ws/support/chat/' + username + '/' + token + '/')
+
+        socket.onmessage = function (e) {
+            var message = JSON.parse(e.data);
+
+            // جلوگیری از نمایش مجدد پیام ارسال شده توسط خود کاربر
+            if (message.username === username) return;
+
+            var grand_parent = document.createElement("div");
+            grand_parent.className = 'chat-message receiver';
+            var parent = document.createElement('div');
+            parent.className = 'message';
+            var child1 = document.createElement('p');
+            child1.className = 'mb-1';
+            var child2 = document.createElement('strong');
+            child2.textContent = message.username;
+            child1.appendChild(child2);
+            var child3 = document.createElement('p');
+            child3.className = 'mb-0';
+            child3.textContent = message.message;
+            parent.appendChild(child1);
+            parent.appendChild(child3);
+            grand_parent.appendChild(parent);
+            chat_body.appendChild(grand_parent);
+        };
+
+        socket.onclose = function (event) {
+            console.log("Websocket connection is closed.")
+        }
+
+        socket.onerror = function (error) {
+            console.error("websocket error: ", error)
+        }
+
+        chat_btn.addEventListener("click", () => {
+            const message = chat_input.value.trim()
+            if (!message) return; // جلوگیری از ارسال پیام خالی
+            var grand_parent = document.createElement("div")
+            grand_parent.className = 'chat-message sender'
+            var parent = document.createElement('div')
+            parent.className = 'message'
+            var child1 = document.createElement('p')
+            child1.className = 'mb-1'
+            var child2 = document.createElement('strong')
+            child2.textContent = username
+            child1.appendChild(child2)
+            var child3 = document.createElement('p')
+            child3.className = 'mb-0'
+            child3.textContent = message
+            parent.appendChild(child1)
+            parent.appendChild(child3)
+            grand_parent.appendChild(parent)
+            chat_body.appendChild(grand_parent)
+            socket.send(
+                JSON.stringify({
+                    message: message,
+                    token: token,
+                    username:username
+                })
+            )
+            chat_input.value = ""
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{% extends 'Dashboard/dashboard.html' %}
+{% block content %}
+    <div class="container mx-auto my-5">
+        <a href="{% url 'post-create' %}"><button class="btn btn-outline-success mb-3">Add New</button></a>
+        <div class="table-responsive">
+            <table class="table table-bordered bg-white shadow-md rounded-lg">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="form-check-input">
+                        </th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Comments</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="form-check-input">
+                            </td>
+                            <td>
+                                <div class="flex flex-col">
+                                    <span>{{post.title}}</span>
+                                    <span class="text-sm text-gray-500">— Posts Page</span>
+                                    <div class="mt-1">
+                                        <a href="{% url 'post-update' post.id %}" class="text-blue-500 hover:underline text-sm">Edit</a> |
+                                        <a href="{% url 'post-update' post.id %}" class="text-blue-500 hover:underline text-sm">Quick Edit</a> |
+                                        <a href="{% url 'post-delete' post.id %}" class="text-blue-500 hover:underline text-sm">Trash</a> |
+                                        <a href="{% url 'post-detail' post.id %}" class="text-blue-500 hover:underline text-sm">View</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{post.author.username}}</td>
+                            <td>—</td>
+                            <td>{{post.status}}<br>{{post.created_time}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

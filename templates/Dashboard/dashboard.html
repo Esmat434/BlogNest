@@ -1,0 +1,117 @@
+{% extends 'Dashboard/base.html' %}
+{% block content %}
+    <!-- Stats Cards -->
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="bg-primary text-white p-4 rounded shadow-sm">
+                <h3>{{posts.count}}</h3>
+                <p>Total of Posts</p>
+                <i class="fas fa-regular fa-book" style="font-size: 30px;"></i>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="bg-success text-white p-4 rounded shadow-sm">
+                <h3>{{ posts.total_comments|default:0 }}</h3>
+                <p>Total of Commenst</p>
+                <i class="fas fa-regular fa-comments" style="font-size: 30px;"></i>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="bg-warning text-white p-4 rounded shadow-sm">
+                <h3>{{total_follower}}</h3>
+                <p>Total of Follower</p>
+                <i class="fas fa-user-plus fa-2x"></i>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="bg-danger text-white p-4 rounded shadow-sm">
+                <h3>{{total_followed}}</h3>
+                <p>Total of Followed</p>
+                <i class="fas fa-user-plus fa-2x"></i>
+            </div>
+        </div>
+    </div
+    <!-- Charts Section -->
+    <div class="row mt-5">
+        <div class="col-md-8">
+            <canvas id="postsChart"></canvas>
+        </div>
+        <div class="col-md-4">
+            <div class="bg-info p-4 rounded shadow-sm text-white">
+                <h4>Visitors</h4>
+                <div id="map" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+<!-- Chart.js Script -->
+<script>
+    const monthly_posts_data = JSON.parse(`{{ monthly_posts_data|safe }}`);
+    let post_list = [0]
+    let view_list = [0]
+    let like_list = [0]
+    let comment_list = [0]
+    monthly_posts_data.forEach(data => {
+        post_list.push(data.total_posts)
+        view_list.push(data.total_views)
+        like_list.push(data.total_likes)
+        comment_list.push(data.total_comments)
+    });
+    const ctx = document.getElementById('postsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [
+                    {
+                        label: 'Posts',
+                        data: post_list,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Likes',
+                        data: like_list,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Views',
+                        data: view_list,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Comments',
+                        data: comment_list,
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Monthly Performance Overview'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+</script>
+{% endblock %}

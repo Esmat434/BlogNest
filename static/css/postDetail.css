@@ -1,0 +1,172 @@
+/* Global Styles */
+body {
+    background: #f7f7f7;
+    font-family: Arial, sans-serif;
+}
+
+/* Header Section */
+.post-header {
+    position: relative;
+    background-size: cover;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.post-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.header-content {
+    z-index: 2;
+    text-align: center;
+}
+
+.header-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.header-content p {
+    font-size: 1.2rem;
+}
+
+/* Breadcrumb */
+.breadcrumb-section {
+    background: #fff;
+    padding: 10px 20px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb {
+    margin-bottom: 0;
+    background: transparent;
+}
+
+/* Main Content */
+.post-content {
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.post-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.post-content h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.post-content p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+blockquote {
+    font-style: italic;
+    color: #555;
+    border-left: 4px solid #ccc;
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+/* Card Section */
+.custom-card img {
+    border-radius: 8px 8px 0 0;
+}
+
+.card-img {
+    width: 100%;
+    /* عرض تصویر برابر عرض کارت */
+    height: 200px;
+    /* ارتفاع ثابت */
+    object-fit: cover;
+    /* محتوای تصویر به‌طور مناسب برش داده شود */
+    border-radius: 8px;
+    /* گرد کردن گوشه‌ها */
+}
+
+.custom-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.custom-card .views {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Profile Card Styles */
+.profile-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+}
+
+.profile-card .profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-card .name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.profile-card .follow-btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.profile-card .bio,
+.profile-card .birthdate,
+.profile-card .phone {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.profile-card .bio i,
+.profile-card .birthdate i,
+.profile-card .phone i {
+    color: #007bff;
+    margin-right: 8px;
+}
+
+.reply-form input {
+    margin-top: 5px;
+    /* فاصله کوچک بین فیلدها */
+}
+
+.reply-form {
+    align-items: center;
+    justify-content: start;
+}
+
+.reply-form input[type="text"] {
+    transition: all 0.3s ease;
+    /* افزودن انیمیشن برای زیبایی */
+}
+
+.reply-form input[type="submit"] {
+    transition: all 0.3s ease;
+}

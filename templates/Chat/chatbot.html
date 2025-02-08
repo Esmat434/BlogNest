@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .chat-box {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .message {
+            margin: 10px 0;
+        }
+
+        .user {
+            color: blue;
+        }
+
+        .bot {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-box">
+        <h1>Chatbot</h1>
+        <div id="chat-log"></div>
+    </div>
+
+    <script
+        src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.1.0-beta.3/libs/oversea/index.js"></script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+            config: {
+                bot_id: '7468303309968064517',
+                auth: {
+                    type:'token',
+                    token: 'pat_GxU2PcZ5g0a0aU29JSgP5E9rWT2xWmNLN7Wx1LyU1dRtBi9vHMbZCv3QnJUfLbLP'
+                }
+            },
+            componentProps: {
+                title: 'Coze',
+            },
+        });
+    </script>
+</body>
+
+</html>
