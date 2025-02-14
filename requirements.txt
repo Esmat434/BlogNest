@@ -46,3 +46,5 @@ typing-extensions==4.12.2
 urllib3==2.3.0
 uvicorn==0.34.0
 zope.interface==7.2
+dj-database-url==2.3.0
+psycopg2-binary==2.9.10
