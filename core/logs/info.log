@@ -1,0 +1,19 @@
+2025-02-14 03:22:07,774 INFO autoreload Watching for file changes with StatReloader
+2025-02-14 04:38:57,563 INFO autoreload Watching for file changes with StatReloader
+2025-02-14 04:41:28,849 INFO autoreload Watching for file changes with StatReloader
+2025-02-14 04:41:38,206 INFO views User:  request sended for show posts successfully from app /blog/view/PostListView.
+2025-02-14 04:41:38,581 INFO runserver [mHTTP GET / 200 [0.40, 127.0.0.1:57663][0m
+2025-02-14 04:41:41,562 WARNING log Not Found: /favicon.ico
+2025-02-14 04:41:41,564 WARNING runserver [33mHTTP GET /favicon.ico 404 [0.12, 127.0.0.1:57663][0m
+2025-02-14 04:41:44,529 INFO runserver [32mHTTP GET /post/detail/7/ 302 [0.01, 127.0.0.1:57663][0m
+2025-02-14 04:41:44,560 INFO views requested from signin to login into your account from app /accounts/views/SigninView.
+2025-02-14 04:41:44,657 INFO runserver [mHTTP GET /signin/ 200 [0.10, 127.0.0.1:57663][0m
+2025-02-14 04:41:50,544 INFO views requested from signin post method to login in to your account from app /accounts/views/SigninView.
+2025-02-14 04:41:54,130 INFO runserver [32mHTTP POST /signin/ 302 [3.60, 127.0.0.1:57663][0m
+2025-02-14 04:41:54,178 INFO views User: admin request sended for show posts successfully from app /blog/view/PostListView.
+2025-02-14 04:41:54,278 INFO runserver [mHTTP GET / 200 [0.12, 127.0.0.1:57663][0m
+2025-02-14 04:41:58,372 INFO views User: admin sended request to hsow detail of post successfully from app /blog/view/PostDetailView.
+2025-02-14 04:41:58,550 INFO runserver [mHTTP GET /post/detail/7/ 200 [0.20, 127.0.0.1:57663][0m
+2025-02-14 04:42:00,658 INFO runserver [mHTTP GET /static/js/postDetail.js 200 [0.27, 127.0.0.1:57669][0m
+2025-02-14 04:42:05,044 INFO views User admin requested from report to post and follow from app /dashboard/views/ReportView.
+2025-02-14 04:42:05,201 INFO runserver [mHTTP GET /dashboard/ 200 [0.18, 127.0.0.1:57663][0m

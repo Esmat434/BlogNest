@@ -1,0 +1,2 @@
+2025-02-14 04:41:41,562 WARNING log Not Found: /favicon.ico
+2025-02-14 04:41:41,564 WARNING runserver [33mHTTP GET /favicon.ico 404 [0.12, 127.0.0.1:57663][0m
