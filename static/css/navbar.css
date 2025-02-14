@@ -1,0 +1,35 @@
+.profile-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+/* تنظیم موقعیت نشان اعلان */
+.notification-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+    padding: 4px 6px;
+}
+
+@media (max-width: 768px) {
+    .search-box {
+        max-width: 150px;
+        /* کوچک کردن نوار جستجو در موبایل */
+    }
+
+    .btn-create {
+        padding: 5px 10px;
+        /* کوچک کردن دکمه "Create Post" */
+        font-size: 14px;
+    }
+}

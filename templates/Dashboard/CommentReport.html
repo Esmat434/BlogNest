@@ -1,0 +1,61 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static '/css/commentReport.css' %}">
+    <div class="container mx-auto bg-white p-6 shadow-lg rounded-lg">
+        <h1 class="text-2xl font-semibold mb-4">Comments</h1>
+        <!-- Filter Options -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <select class="form-select w-auto d-inline-block me-2">
+                    <option value="all">All</option>
+                    <option value="mine">Mine</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="spam">Spam</option>
+                    <option value="trash">Trash</option>
+                </select>
+                <button class="btn btn-primary">Apply</button>
+            </div>
+            <div>
+                <select class="form-select w-auto d-inline-block">
+                    <option value="all-types">All comment types</option>
+                    <option value="comments">Comments</option>
+                    <option value="pings">Pings</option>
+                </select>
+                <button class="btn btn-secondary">Filter</button>
+            </div>
+        </div>
+
+        <!-- Comment List -->
+        <div class="space-y-4">
+            {% for post in posts %}
+                {% for comment in post.Comment.all %}
+                    <!-- Comment Card -->
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 comment-card">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <div>
+                                    <p class="font-bold text-gray-700 mb-0">{{comment.user.username}}</p>
+                                    <p class="text-sm text-gray-500 mb-0">{{comment.user.email}}</p>
+                                    <p class="text-sm text-gray-500">{{comment.created_time}}</p>
+                                </div>
+                            </div>
+                            <div class="text-end d-flex align-items-center">
+                                <a href="{% url 'post-detail' post.id %}">
+                                    <button type="button" class="btn btn-outline-primary btn-sm me-2">View</button>
+                                </a>
+                                <form action="{% url 'post-detail' post.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delete_comment_id" value="{{comment.id}}">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" name="btn" value="delete_comment">Trash</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: False
+      SECRET_KEY: django-insecure-(_$ym$#qx=rcyok3u4be@m)1@5_*kd1rp9$3%6-bc-v=xlu$@3
+      ALLOWED_HOSTS: localhost,127.0.0.1

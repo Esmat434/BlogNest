@@ -1,0 +1,26 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+{% block content %} 
+    <link rel="stylesheet" href="{% static '/css/followerReport.css' %}">
+    <div class="flex flex-wrap justify-center gap-6">
+        {% for follow in followers %}
+            <!-- User Card 1 -->
+            <div class="bg-white rounded-lg overflow-hidden p-6 flex flex-col items-center gap-4 w-full sm:w-1/2 lg:w-1/2">
+                <!-- Profile Image -->
+                <div>
+                    {% if follow.follower.picture %}
+                        <img src="{% url 'follow.follower.picture.url'}" alt="User Image" class="circle-img" />
+                    {% else %}
+                        <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"alt="User Image" class="circle-img" />
+                    {% endif %}
+                </div>
+                <!-- User Details -->
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">{{follow.follower.username}}</h3>
+                    <p class="text-gray-500 text-sm">{{follow.follower.email}}</p>
+                    <p class="text-gray-400 text-xs mt-1">{{follow.created_time}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

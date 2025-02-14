@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static '/css/notificationPost.css' %}">
+    <div class="container mt-4">
+        {% for post in posts %}
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <!-- Notification 1 -->
+                    <div class="notification-card d-flex align-items-start">
+                        {% if post.author.picutre %}
+                            <img src="{{post.author.picture.url}}"
+                                alt="User Image" class="circle-img" />
+                        {% else %}
+                            <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"
+                                    alt="User Image" class="circle-img" />
+                        {% endif %}            
+                        <div>
+                            <a href="{% url 'post-detail' post.id %}"><strong>{{post.title}}</strong></a><br>
+                            <span class="text-primary">{{post.author.username}}</span>  {{post.content|slice:":20"}}....
+                            <div class="notification-time">{{post.created_time.hour}} hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

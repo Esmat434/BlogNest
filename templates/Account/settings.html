@@ -1,0 +1,104 @@
+{% extends 'Dashboard/base.html' %}
+{% block content %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <div class="max-w-4xl mx-auto py-10">
+        <!-- Social Accounts -->
+        <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4">Connect Accounts</h2>
+            <div class="space-y-4">
+                <button
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center justify-between">
+                    <span><i class="fa-brands fa-facebook"></i> Connect Facebook Account</span>
+                </button>
+                <button
+                    class="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg flex items-center justify-between">
+                    <span>Connect Forem Account</span>
+                </button>
+                <button
+                    class="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-lg flex items-center justify-between">
+                    <span><i class="fa-brands fa-github"></i> Connect GitHub Account</span>
+                </button>
+                <button
+                    class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg flex items-center justify-between opacity-50 cursor-not-allowed">
+                    <span><i class="fa-brands fa-x-twitter"></i> Connect Twitter (X) Account</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Set New Password -->
+        <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4">Set new password</h2>
+            <p class="text-gray-400 mb-4">
+                If your account was created using social account authentication, you may prefer to add an email login.
+                Please reset the password for your primary email address to enable this.
+            </p>
+            <form class="space-y-4" method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="current-password" class="block text-sm font-medium mb-2">Current password</label>
+                    <input id="current-password" type="password" name="current_password" value="{{user.password}}"
+                        class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg py-2 px-4">
+                </div>
+                <div>
+                    <label for="new-password" class="block text-sm font-medium mb-2">Password</label>
+                    <input id="new-password" type="password" name="new_password"
+                        class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg py-2 px-4">
+                </div>
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium mb-2">Confirm new password</label>
+                    <input id="confirm-password" type="password" name="confirm_password"
+                        class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg py-2 px-4">
+                </div>
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg">
+                    Set New Password
+                </button>
+            </form>
+        </section>
+
+        <!-- Account Emails -->
+        <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4">Account emails</h2>
+            <div class="space-y-2">
+                <p><span class="font-medium">Primary email:</span> hadelesmatullah@gmail.com</p>
+                <p><span class="font-medium">Google email:</span> hadelesmatullah@gmail.com</p>
+            </div>
+        </section>
+
+        <!-- Export Content -->
+        <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4">Export content</h2>
+            <p class="text-gray-400 mb-4">You can request an export of all your content. Currently, we only support the
+                export of your posts and comments, if you have any.</p>
+            <form>
+                <label class="inline-flex items-center mb-4">
+                    <input type="checkbox"
+                        class="text-purple-600 focus:ring-purple-500 bg-gray-800 border-gray-700 rounded">
+                    <span class="ml-2">Request an export of your content</span>
+                </label>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
+                    Submit Data Request
+                </button>
+            </form>
+        </section>
+
+        <!-- Danger Zone -->
+        <section class="mb-10">
+            <h2 class="text-xl font-bold text-red-500 mb-4">Danger Zone</h2>
+            <div class="space-y-4">
+                <div>
+                    <p class="text-gray-400 mb-2">Remove OAuth Associations</p>
+                    <p class="text-gray-400">You need a remaining authentication method to authenticate you. Add another
+                        method above before continuing.</p>
+                </div>
+                <div>
+                    <p class="text-gray-400 mb-2">Delete account</p>
+                    <p class="text-gray-400">Deleting your account will delete your profile, content, and authentication
+                        associations.</p>
+                    <a href="/delete-account/"><button class="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg">
+                        Delete Account
+                    </button></a>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

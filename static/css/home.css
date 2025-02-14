@@ -1,0 +1,19 @@
+.ascii-art {
+    font-family: monospace;
+    white-space: pre-wrap;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+div,span,p {
+    text-decoration: none;
+    color: inherit;
+}
