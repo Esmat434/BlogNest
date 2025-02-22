@@ -17,3 +17,39 @@
 2025-02-14 04:42:00,658 INFO runserver [mHTTP GET /static/js/postDetail.js 200 [0.27, 127.0.0.1:57669][0m
 2025-02-14 04:42:05,044 INFO views User admin requested from report to post and follow from app /dashboard/views/ReportView.
 2025-02-14 04:42:05,201 INFO runserver [mHTTP GET /dashboard/ 200 [0.18, 127.0.0.1:57663][0m
+2025-02-19 08:35:08,625 INFO autoreload Watching for file changes with StatReloader
+2025-02-19 08:35:23,200 INFO views User:  request sended for show posts successfully from app /blog/view/PostListView.
+2025-02-19 08:35:23,521 INFO runserver [mHTTP GET / 200 [0.35, 127.0.0.1:58941][0m
+2025-02-19 08:35:24,406 INFO runserver [mHTTP GET /static/css/home.css 200 [0.40, 127.0.0.1:58942][0m
+2025-02-19 08:35:24,434 INFO runserver [mHTTP GET /static/css/navbar.css 200 [0.43, 127.0.0.1:58941][0m
+2025-02-19 08:35:24,475 INFO runserver [mHTTP GET /static/js/navbar.js 200 [0.46, 127.0.0.1:58943][0m
+2025-02-19 08:35:26,516 WARNING log Not Found: /favicon.ico
+2025-02-19 08:35:26,517 WARNING runserver [33mHTTP GET /favicon.ico 404 [0.27, 127.0.0.1:58943][0m
+2025-02-19 08:35:31,334 INFO views requested from signin to login into your account from app /accounts/views/SigninView.
+2025-02-19 08:35:31,407 INFO runserver [mHTTP GET /signin/ 200 [0.08, 127.0.0.1:58943][0m
+2025-02-19 08:35:40,060 INFO views requested from signin post method to login in to your account from app /accounts/views/SigninView.
+2025-02-19 08:35:40,726 INFO runserver [32mHTTP POST /signin/ 302 [0.67, 127.0.0.1:58943][0m
+2025-02-19 08:35:40,766 INFO views User: admin request sended for show posts successfully from app /blog/view/PostListView.
+2025-02-19 08:35:40,816 INFO runserver [mHTTP GET / 200 [0.06, 127.0.0.1:58943][0m
+2025-02-19 08:35:43,184 INFO views User: admin requested send successfully.
+2025-02-19 08:35:43,251 INFO runserver [mHTTP GET /post/create/ 200 [0.08, 127.0.0.1:58943][0m
+2025-02-19 08:35:43,447 INFO runserver [mHTTP GET /static/css/createPost.css 200 [0.01, 127.0.0.1:58943][0m
+2025-02-19 08:35:43,488 INFO runserver [mHTTP GET /static/js/createPost.js 200 [0.05, 127.0.0.1:58941][0m
+2025-02-19 08:35:47,753 INFO views User: admin request sended for show posts successfully from app /blog/view/PostListView.
+2025-02-19 08:35:47,801 INFO runserver [mHTTP GET / 200 [0.06, 127.0.0.1:58941][0m
+2025-02-19 08:35:50,164 INFO views User: admin requested send successfully.
+2025-02-19 08:35:50,187 INFO runserver [mHTTP GET /post/create/ 200 [0.03, 127.0.0.1:58941][0m
+2025-02-19 08:35:52,306 INFO views User admin requested from report to post and follow from app /dashboard/views/ReportView.
+2025-02-19 08:35:52,372 INFO runserver [mHTTP GET /dashboard/ 200 [0.07, 127.0.0.1:58941][0m
+2025-02-19 08:35:59,053 INFO views User: admin request sended for show posts successfully from app /blog/view/PostListView.
+2025-02-19 08:35:59,100 INFO runserver [mHTTP GET / 200 [0.06, 127.0.0.1:58941][0m
+2025-02-19 08:36:02,088 INFO views User: admin sended request to hsow detail of post successfully from app /blog/view/PostDetailView.
+2025-02-19 08:36:02,187 INFO runserver [mHTTP GET /post/detail/7/ 200 [0.11, 127.0.0.1:58941][0m
+2025-02-19 08:36:02,347 INFO runserver [mHTTP GET /static/css/postDetail.css 200 [0.01, 127.0.0.1:58941][0m
+2025-02-19 08:36:02,390 INFO runserver [mHTTP GET /static/js/postDetail.js 200 [0.05, 127.0.0.1:58943][0m
+2025-02-19 08:36:07,954 INFO views User: admin send requeste successfully to create like or folloe or comment or saved or delete something from app /blog/view/PostDetailView.
+2025-02-19 08:36:08,031 INFO runserver [mHTTP POST /post/detail/7/ 200 [0.09, 127.0.0.1:58943][0m
+2025-02-19 08:36:19,664 INFO views User: admin send requeste successfully to create like or folloe or comment or saved or delete something from app /blog/view/PostDetailView.
+2025-02-19 08:36:19,749 INFO runserver [mHTTP POST /post/detail/7/ 200 [0.10, 127.0.0.1:58943][0m
+2025-02-19 08:36:29,554 INFO views User: admin sended request to hsow detail of post successfully from app /blog/view/PostDetailView.
+2025-02-19 08:36:29,655 INFO runserver [mHTTP GET /post/detail/7/ 200 [0.12, 127.0.0.1:58943][0m
